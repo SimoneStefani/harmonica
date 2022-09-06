@@ -13,6 +13,7 @@ import dev.simonestefani.harmonica.table.column.DateColumn
 import dev.simonestefani.harmonica.table.column.DateTimeColumn
 import dev.simonestefani.harmonica.table.column.DecimalColumn
 import dev.simonestefani.harmonica.table.column.IntegerColumn
+import dev.simonestefani.harmonica.table.column.JsonbColumn
 import dev.simonestefani.harmonica.table.column.TextColumn
 import dev.simonestefani.harmonica.table.column.TimeColumn
 import dev.simonestefani.harmonica.table.column.TimestampColumn
@@ -541,6 +542,32 @@ abstract class AbstractMigration {
             it.sqlDefault = default.sql
         }
         addColumn(tableName, blobColumn, first, justBeforeColumnName)
+    }
+
+    fun addJsonbColumn(
+        tableName: String, columnName: String,
+        nullable: Boolean = false, default: String? = null,
+        first: Boolean = false, justBeforeColumnName: String? = null
+    ) {
+        val jsonbColumn = JsonbColumn(columnName)
+        jsonbColumn.also {
+            it.nullable = nullable
+            it.default = default
+        }
+        addColumn(tableName, jsonbColumn, first, justBeforeColumnName)
+    }
+
+    fun addJsonbColumn(
+        tableName: String, columnName: String,
+        nullable: Boolean = false, default: RawSql,
+        first: Boolean = false, justBeforeColumnName: String? = null
+    ) {
+        val jsonbColumn = JsonbColumn(columnName)
+        jsonbColumn.also {
+            it.nullable = nullable
+            it.sqlDefault = default.sql
+        }
+        addColumn(tableName, jsonbColumn, first, justBeforeColumnName)
     }
 
     /**

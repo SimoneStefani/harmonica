@@ -26,3 +26,11 @@ class Migrator(block: Config.() -> Unit) {
         return loadClass().kotlin.let { it.objectInstance ?: it.createInstance() } as T
     }
 }
+
+
+fun main() {
+    Migrator {
+        packageScan = "dev.simonestefani.harmonica"
+        destinationPath = "src/main/resources/migrations"
+    }.migrate()
+}

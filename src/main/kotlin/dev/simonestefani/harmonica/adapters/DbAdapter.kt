@@ -12,6 +12,7 @@ import dev.simonestefani.harmonica.table.column.DateTimeColumn
 import dev.simonestefani.harmonica.table.column.DecimalColumn
 import dev.simonestefani.harmonica.table.column.DoubleColumn
 import dev.simonestefani.harmonica.table.column.IntegerColumn
+import dev.simonestefani.harmonica.table.column.JsonbColumn
 import dev.simonestefani.harmonica.table.column.TextColumn
 import dev.simonestefani.harmonica.table.column.TimeColumn
 import dev.simonestefani.harmonica.table.column.TimestampColumn
@@ -118,6 +119,7 @@ internal abstract class DbAdapter() {
                 is TimestampColumn -> "TIMESTAMP"
                 is UuidColumn -> "UUID"
                 is DoubleColumn -> "DOUBLE PRECISION"
+                is JsonbColumn -> "JSONB"
                 else -> throw Exception()
             }
         }

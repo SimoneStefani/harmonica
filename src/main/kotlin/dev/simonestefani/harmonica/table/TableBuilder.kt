@@ -13,6 +13,7 @@ import dev.simonestefani.harmonica.table.column.DateTimeColumn
 import dev.simonestefani.harmonica.table.column.DecimalColumn
 import dev.simonestefani.harmonica.table.column.DoubleColumn
 import dev.simonestefani.harmonica.table.column.IntegerColumn
+import dev.simonestefani.harmonica.table.column.JsonbColumn
 import dev.simonestefani.harmonica.table.column.TextColumn
 import dev.simonestefani.harmonica.table.column.TimeColumn
 import dev.simonestefani.harmonica.table.column.TimestampColumn
@@ -312,6 +313,31 @@ class TableBuilder {
         return varchar(columnName, size, nullable, default)
     }
 
+    fun jsonb(
+        columnName: String,
+        nullable: Boolean = false,
+        default: String? = null
+    ): ColumnBuilder {
+        val builder = ColumnBuilder(JsonbColumn(columnName).also {
+            it.nullable = nullable
+            it.default = default
+        })
+        addColumn(builder.column)
+        return builder
+    }
+
+    fun jsonb(
+        columnName: String,
+        nullable: Boolean = false,
+        default: RawSql
+    ): ColumnBuilder {
+        val builder = ColumnBuilder(JsonbColumn(columnName).also {
+            it.nullable = nullable
+            it.sqlDefault = default.sql
+        })
+        addColumn(builder.column)
+        return builder
+    }
 
     /**
      * add boolean column

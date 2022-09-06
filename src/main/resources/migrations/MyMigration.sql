@@ -1,0 +1,4 @@
+CREATE TABLE accounts (
+  foo JSONB
+);
+ALTER TABLE accounts ADD COLUMN pew JSONB NOT NULL;

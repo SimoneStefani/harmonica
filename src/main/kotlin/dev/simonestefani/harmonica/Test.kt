@@ -1,13 +1,14 @@
 package dev.simonestefani.harmonica
 
-class MyMigration : dev.simonestefani.harmonica.AbstractMigration() {
+class MyMigration : AbstractMigration() {
     override fun up() {
         createTable("accounts") {
-            integer("pew", default = 2).primaryKey()
-            varchar("foo", 255).nullable()
+            jsonb("foo").nullable()
 
         }
 
-        createIndex("accounts", "pew")
+        addJsonbColumn("accounts", "pew")
     }
 }
+
+
