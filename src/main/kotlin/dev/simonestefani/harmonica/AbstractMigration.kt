@@ -17,11 +17,13 @@ import dev.simonestefani.harmonica.table.column.JsonbColumn
 import dev.simonestefani.harmonica.table.column.TextColumn
 import dev.simonestefani.harmonica.table.column.TimeColumn
 import dev.simonestefani.harmonica.table.column.TimestampColumn
+import dev.simonestefani.harmonica.table.column.UuidColumn
 import dev.simonestefani.harmonica.table.column.VarcharColumn
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
 import java.util.Date
+import java.util.UUID
 
 @MigrationDsl
 abstract class AbstractMigration {
@@ -878,6 +880,18 @@ abstract class AbstractMigration {
             it.nullable = nullable
             it.sqlDefault = default.sql
             it.withTimeZone = withTimeZone
+        }
+        addColumn(tableName, timestampColumn, first, justBeforeColumnName)
+    }
+
+    fun addUuidColumn(
+        tableName: String, columnName: String,
+        nullable: Boolean = false, default: UUID? = null,
+        first: Boolean = false, justBeforeColumnName: String? = null
+    ) {
+        val timestampColumn = UuidColumn(columnName).also {
+            it.nullable = nullable
+            it.default = default
         }
         addColumn(tableName, timestampColumn, first, justBeforeColumnName)
     }
